@@ -1,0 +1,35 @@
+= Flask API Tutorial
+
+
+Install virtual environment
+
+    pip install virtualenv
+
+Create virtual environment by any name. Lets say `venv`
+
+    virtualenv -p python3.6 venv
+
+Activate virtual environment
+
+    source venv/bin/activate
+
+After activating the virtual environment, install requirements by using following command.
+
+    pip install -r requirements.txt
+
+Freeze requirements for virtual environment
+
+    pip freeze > requirements.txt
+
+Running the python flask application
+
+    python src/main.py
+
+Running wsgi gunicorn
+
+    gunicorn --workers 4 --bind 0.0.0.0:5000 src.wsgi:app
+
+Deactivate the virtual environment
+
+    deactivate
+
