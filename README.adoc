@@ -27,9 +27,40 @@ Running the python flask application
 
 Running wsgi gunicorn
 
-    gunicorn --workers 4 --bind 0.0.0.0:5000 src.wsgi:app
+    $ gunicorn --workers 4 --bind 0.0.0.0:5000 src.wsgi:app
+    $ gunicorn -w 6 -b 127.0.0.1:5000  src.wsgi:app
 
 Deactivate the virtual environment
 
     deactivate
 
+
+== Architecture diagram
+Architecture diagram for nginx setup with wsgi unicorn & flask app.
+
+.Nginx as a reverse proxy for WSGI gunicorn
+[#img-wsgi]
+[caption="Figure 1: ",link=https://www.flickr.com/photos/javh/5448336655]
+image::docs/nginx-wsgi-setup.png[nginx reverse proxy setup]
+
+== Get host information using sidecar
+Sidecar app exposes host information about all the hosts registered in eureka service registry. This could be very convenient for non-JVM app.
+
+.Retrieve Host Information for `sidecar-pdf` service
+    GET http://localhost:5678/hosts/sidecar-pdf
+
+.Response
+[source, json]
+----
+[
+    {
+        "host": "localhost",
+        "port": 8058,
+        "secure": false,
+        "uri": "http://localhost:8058",
+        "serviceId": "SIDECAR-PDF",
+    }
+]
+----
+
+In a similar fashion we can retrieve host information about any other service registered in Spring Cloud Eureka Registry - be it JVM app or non-JVM app.
