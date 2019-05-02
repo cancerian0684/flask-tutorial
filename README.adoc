@@ -3,27 +3,28 @@
 
 Install virtual environment
 
-    pip install virtualenv
+    $ pip install virtualenv
 
 Create virtual environment by any name. Lets say `venv`
 
-    virtualenv -p python3.6 venv
+    $ virtualenv -p python3.6 venv
 
 Activate virtual environment
 
-    source venv/bin/activate
+    $ source venv/bin/activate
 
 After activating the virtual environment, install requirements by using following command.
 
-    pip install -r requirements.txt
+    $ cd app
+    $ pip install -r requirements.txt
 
 Freeze requirements for virtual environment
 
-    pip freeze > requirements.txt
+    $ pip freeze > requirements.txt
 
 Running the python flask application
 
-    python src/main.py
+    $ python src/main.py
 
 Running wsgi gunicorn
 
@@ -32,7 +33,7 @@ Running wsgi gunicorn
 
 Deactivate the virtual environment
 
-    deactivate
+    $ deactivate
 
 
 == Architecture diagram
@@ -64,3 +65,13 @@ Sidecar app exposes host information about all the hosts registered in eureka se
 ----
 
 In a similar fashion we can retrieve host information about any other service registered in Spring Cloud Eureka Registry - be it JVM app or non-JVM app.
+
+== Docker containerization
+
+Creating a docker image:
+
+    $ docker build -t flask_tutorial .
+
+Running docker container:
+
+    $ docker run -p 80:8058 flask_tutorial:latest
